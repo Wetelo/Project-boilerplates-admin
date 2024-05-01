@@ -31,3 +31,8 @@ dist-ssr
 !.yarn/versions
 yarn-debug.log*
 yarn-error.log*
+
+
+#env
+.env
+.env.local
