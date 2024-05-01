@@ -1,7 +1,9 @@
 import { Palette } from '@mui/material';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
-// You can
+/* You can customize typography params using typography
+https://mui.com/material-ui/customization/palette/
+*/
 export const typography: TypographyOptions | ((palette: Palette) => TypographyOptions) = {
   fontFamily: '"Source Sans Pro", sans-serif',
   h1: {

@@ -1,6 +1,7 @@
 import { PaletteOptions } from '@mui/material';
 
 /*
+You can customize colors using pallete
 htpps://mui.com/material-ui/customization/palette/
 */
 
