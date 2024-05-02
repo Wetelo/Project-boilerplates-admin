@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-import { AuthGuard, GuestGuard } from '@/guards/guards';
+import { AuthGuard, GuestGuard } from '@/guards';
 import { ROUTES } from '@/router/constants';
 
 export const AppRouter: React.FC = (): React.ReactElement | null =>
