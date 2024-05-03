@@ -1,5 +1,5 @@
 import { KeyboardArrowDown } from '@mui/icons-material';
-import { Select, SelectProps, Typography } from '@mui/material';
+import { FormHelperText, Select, SelectProps, Typography } from '@mui/material';
 import { FC } from 'react';
 import { Controller, FieldPath, FieldValues } from 'react-hook-form';
 
@@ -18,7 +18,7 @@ export const SelectInput: FC<SelectInputProps<FieldValues>> = ({
   <Controller
     name={name}
     defaultValue={defaultValue}
-    render={({ field: { value, onBlur, onChange } }) => (
+    render={({ field: { value, onBlur, onChange }, fieldState: { error } }) => (
       <>
         <Typography variant="h6" sx={{ fontSize: 10 }} mb={1}>
           {placeholder}
@@ -36,6 +36,7 @@ export const SelectInput: FC<SelectInputProps<FieldValues>> = ({
         >
           {children}
         </Select>
+        <FormHelperText>{error ? error.message : ''}</FormHelperText>
       </>
     )}
   />

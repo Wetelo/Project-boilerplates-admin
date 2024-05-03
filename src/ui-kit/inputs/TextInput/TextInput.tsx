@@ -13,7 +13,6 @@ export type TextInputProps = {
   disabled?: boolean;
   readOnly?: boolean;
   error?: string;
-  testId?: string;
   autoComplete?: string;
   inputComponent?: React.ElementType<InputBaseComponentProps>;
   multiline?: boolean;
@@ -72,9 +71,6 @@ export const TextInput = forwardRef<
       helperText={props.helperText}
       disabled={props.disabled}
       autoComplete={props.autoComplete}
-      FormHelperTextProps={{
-        ['data-testid' as string]: `${props.testId}-error`,
-      }}
       multiline={props.multiline}
       minRows={props.minRows}
       maxRows={props.maxRows}
