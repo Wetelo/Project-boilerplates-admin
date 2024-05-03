@@ -12,7 +12,7 @@ import { useSignInMutation } from '@/services/auth';
 import { useAppDispatch } from '@/store';
 import { authSlice } from '@/store/auth';
 import { TSignInFormData } from '@/types';
-import { FormTextInput } from '@/ui-kit/inputs';
+import { FormTextInput } from '@/ui-kit';
 
 import { signInSchema } from './schema';
 

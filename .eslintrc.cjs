@@ -56,6 +56,7 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
   parserOptions: {
     ecmaVersion: 'latest',
