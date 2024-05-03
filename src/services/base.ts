@@ -4,7 +4,7 @@ import { getEnv, setAccessTokenToHeaders } from '@/utils';
 
 const { api } = getEnv();
 
-const getBaseQuery = (): ReturnType<typeof fetchBaseQuery> =>
+export const getBaseQuery = (): ReturnType<typeof fetchBaseQuery> =>
   fetchBaseQuery({
     baseUrl: api,
     prepareHeaders: (headers) => setAccessTokenToHeaders(headers),
