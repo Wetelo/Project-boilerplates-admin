@@ -1,1 +1,1 @@
-export { AutocompleteInput, FormTextInput, TextInput } from './inputs';
+export { AutocompleteInput, DateTimeInput, FormTextInput, TextInput } from './inputs';
