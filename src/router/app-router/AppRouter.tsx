@@ -2,6 +2,8 @@ import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import { AuthGuard, GuestGuard } from '@/guards';
+import { AuthLayout } from '@/layouts';
+import { SignIn } from '@/pages/SignIn';
 import { ROUTES } from '@/router/constants';
 
 export const AppRouter: React.FC = (): React.ReactElement | null =>
@@ -10,10 +12,17 @@ export const AppRouter: React.FC = (): React.ReactElement | null =>
       path: ROUTES.AUTH.ROOT,
       element: (
         <GuestGuard>
-          <div>Guest</div>
+          <AuthLayout />
         </GuestGuard>
       ),
+      children: [
+        {
+          path: ROUTES.AUTH.ROOT,
+          element: <SignIn />,
+        },
+      ],
     },
+
     {
       path: ROUTES.HOME,
       element: (

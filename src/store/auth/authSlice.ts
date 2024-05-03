@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUserResponse } from '@/interfaces';
-import { getLocalStorageItem } from '@/utils';
+import { getAccessToken } from '@/utils';
+import { removeAccessToken } from '@/utils/auth';
 
 interface AuthState {
   accessToken: string | null;
@@ -9,7 +10,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  accessToken: getLocalStorageItem('accessToken') ?? null,
+  accessToken: getAccessToken() ?? null,
   user: null,
 };
 
@@ -25,6 +26,12 @@ export const authSlice = createSlice({
       }>,
     ) {
       state.accessToken = action.payload.token;
+      state.user = action.payload.user;
+    },
+    logout(state) {
+      state.accessToken = null;
+      state.user = null;
+      removeAccessToken();
     },
   },
 });

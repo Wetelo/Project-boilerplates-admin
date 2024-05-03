@@ -1,8 +1,11 @@
 import { UserRoleEnum } from '@/enums';
 
-import { getLocalStorageItem } from './localStorage';
+import { getLocalStorageItem, removeLocalStorageItem } from './localStorage';
 
-export const getAccessToken = () => getLocalStorageItem('accessToken');
+const AUTH_TOKEN_NAME = 'accessToken';
+
+export const getAccessToken = () => getLocalStorageItem(AUTH_TOKEN_NAME);
+export const removeAccessToken = () => removeLocalStorageItem(AUTH_TOKEN_NAME);
 
 export const checkIsAdmin = (token?: string | null) => {
   const decodedToken = token && JSON.parse(atob(token.split('.')[1]));
@@ -10,7 +13,7 @@ export const checkIsAdmin = (token?: string | null) => {
 };
 
 export const setAccessTokenToHeaders = (headers: Headers) => {
-  const token = typeof localStorage !== 'undefined' && getLocalStorageItem('accessToken');
+  const token = typeof localStorage !== 'undefined' && getAccessToken();
   if (token) {
     headers.set('Authorization', `Bearer ${token}`);
   }
