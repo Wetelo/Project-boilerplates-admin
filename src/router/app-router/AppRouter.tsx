@@ -6,6 +6,9 @@ import { AuthLayout } from '@/layouts';
 import { SignIn } from '@/pages/SignIn';
 import { ROUTES } from '@/router/constants';
 
+import Header from '../../components/header/Header';
+import { MainUserPage } from '../../pages/Users';
+
 export const AppRouter: React.FC = (): React.ReactElement | null =>
   useRoutes([
     {
@@ -36,6 +39,20 @@ export const AppRouter: React.FC = (): React.ReactElement | null =>
           element: <div>HOME</div>,
         },
       ],
+    },
+    {
+      path: ROUTES.USERS,
+      element: (
+        <GuestGuard>
+          <div>
+            <Header />
+            <div>
+              <MainUserPage />
+              <div>Users (mock data*)</div>
+            </div>
+          </div>
+        </GuestGuard>
+      ),
     },
     { path: '404', element: '' },
     {
