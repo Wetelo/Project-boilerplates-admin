@@ -7,9 +7,13 @@ import { stringAvatar } from '@/utils';
 import { styles } from './styles';
 import { useHeader } from './useHeader';
 
-const Header: FC<{ title?: string }> = ({ title }) => {
-  const { user, anchorElUser, onLogoutClick, handleDrawerToggle, handleOpenUserMenu, handleCloseUserMenu } =
-    useHeader();
+type HeaderProps = {
+  title?: string;
+  handleOpenMobileNav: () => void;
+};
+
+const Header: FC<HeaderProps> = ({ title, handleOpenMobileNav }) => {
+  const { user, anchorElUser, onLogoutClick, handleOpenUserMenu, handleCloseUserMenu } = useHeader();
   return (
     <Box sx={styles.container}>
       <CssBaseline />
@@ -20,7 +24,7 @@ const Header: FC<{ title?: string }> = ({ title }) => {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              onClick={handleOpenMobileNav}
               sx={styles.openDrawer}
             >
               <MenuIcon color="primary" />
@@ -28,7 +32,9 @@ const Header: FC<{ title?: string }> = ({ title }) => {
             <Typography variant="h4">{title}</Typography>
           </Box>
           <IconButton onClick={handleOpenUserMenu} size="large">
-            <Avatar {...stringAvatar(`${user?.firstName} ${user?.lastName}`)} />
+            <Avatar
+              {...stringAvatar(user?.firstName && user.lastName ? `${user?.firstName} ${user?.lastName}` : 'Admin')}
+            />
           </IconButton>
           <Menu
             sx={styles.menu}

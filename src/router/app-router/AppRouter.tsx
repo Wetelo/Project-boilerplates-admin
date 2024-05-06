@@ -2,11 +2,10 @@ import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import { AuthGuard, GuestGuard } from '@/guards';
-import { AuthLayout } from '@/layouts';
+import { AuthLayout, MainLayout } from '@/layouts';
 import { SignIn } from '@/pages/SignIn';
 import { ROUTES } from '@/router/constants';
 
-import Header from '../../components/header/Header';
 import { MainUserPage } from '../../pages/Users';
 
 export const AppRouter: React.FC = (): React.ReactElement | null =>
@@ -25,34 +24,20 @@ export const AppRouter: React.FC = (): React.ReactElement | null =>
         },
       ],
     },
-
     {
       path: ROUTES.HOME,
       element: (
         <AuthGuard>
-          <div>AUTH</div>
+          <MainLayout />
         </AuthGuard>
       ),
       children: [
+        { index: true, element: <MainUserPage /> },
         {
-          path: ROUTES.HOME,
-          element: <div>HOME</div>,
+          path: ROUTES.USERS,
+          element: <MainUserPage />,
         },
       ],
-    },
-    {
-      path: ROUTES.USERS,
-      element: (
-        <GuestGuard>
-          <div>
-            <Header />
-            <div>
-              <MainUserPage />
-              <div>Users (mock data*)</div>
-            </div>
-          </div>
-        </GuestGuard>
-      ),
     },
     { path: '404', element: '' },
     {

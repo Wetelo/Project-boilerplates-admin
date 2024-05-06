@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUserResponse } from '@/interfaces';
 import { getAccessToken } from '@/utils';
-import { removeAccessToken } from '@/utils/auth';
+import { removeAccessToken, setAccessTokenToStorage } from '@/utils/auth';
 
-interface AuthState {
+export interface IAuthState {
   accessToken: string | null;
   user: IUserResponse | null;
 }
 
-const initialState: AuthState = {
+const initialState: IAuthState = {
   accessToken: getAccessToken() ?? null,
   user: null,
 };
@@ -25,6 +25,7 @@ export const authSlice = createSlice({
         user: IUserResponse;
       }>,
     ) {
+      setAccessTokenToStorage(action?.payload?.token as string);
       state.accessToken = action.payload.token;
       state.user = action.payload.user;
     },

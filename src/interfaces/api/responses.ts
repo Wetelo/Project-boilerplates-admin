@@ -9,4 +9,6 @@ export interface IUserResponse {
   id: number;
   email: string;
   role: UserRoleEnum;
+  firstName?: string;
+  lastName?: string;
 }
