@@ -22,5 +22,7 @@ export const stringAvatar = (name: string) => ({
   sx: {
     bgcolor: stringToColor(name),
   },
-  children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  children: name.split(' ')?.[1]?.length
+    ? `${name.split(' ')?.[0]?.[0]}${name.split(' ')?.[1]?.[0]}`
+    : `${name.split(' ')?.[0]?.[0]}`,
 });

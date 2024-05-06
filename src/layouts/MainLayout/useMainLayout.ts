@@ -1,21 +1,22 @@
 import type { MouseEvent } from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from '@/router';
-import { logout, selectAuthenticatedUserSelector } from '@/store/auth';
+import { useAppDispatch } from '@/store';
+import { authSlice, selectAuthenticatedUserSelector } from '@/store/auth';
 
-export const useHeader = () => {
+export const useMainLayout = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  // todo: get auth user from api
   const user = useSelector(selectAuthenticatedUserSelector);
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen((prev) => !prev);
   };
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -27,7 +28,7 @@ export const useHeader = () => {
   };
 
   const onLogoutClick = () => {
-    dispatch(logout());
+    dispatch(authSlice.actions.logout());
     navigate(ROUTES.AUTH.ROOT);
   };
 

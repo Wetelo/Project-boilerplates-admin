@@ -1,8 +1,10 @@
 import { UserRoleEnum } from '@/enums';
 
-import { getLocalStorageItem, removeLocalStorageItem } from './localStorage';
+import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from './localStorage';
 
-const AUTH_TOKEN_NAME = 'accessToken';
+export const AUTH_TOKEN_NAME = 'accessToken';
+
+export const setAccessTokenToStorage = (token: string) => setLocalStorageItem(AUTH_TOKEN_NAME, token);
 
 export const getAccessToken = () => getLocalStorageItem(AUTH_TOKEN_NAME);
 export const removeAccessToken = () => removeLocalStorageItem(AUTH_TOKEN_NAME);
