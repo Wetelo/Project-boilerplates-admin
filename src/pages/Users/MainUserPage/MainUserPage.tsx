@@ -5,7 +5,7 @@ import React from 'react';
 import { DeleteUserModal } from '@/components/modals';
 import { CustomTable } from '@/components/table/CustomTable';
 import { UserTableItem } from '@/components/table/UserTableItem';
-import { IUserResponse } from '@/types';
+import { IUserResponse } from '@/interfaces';
 
 import { filteringFields, headCells } from './constants';
 import { useMainUserPage } from './useMainUserPage';

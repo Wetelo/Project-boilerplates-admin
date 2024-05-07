@@ -5,8 +5,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useTableItem } from '@/hooks';
+import { IUserResponse } from '@/interfaces';
 import { openDeleteUserModal } from '@/store/users/slice';
-import type { IUserResponse } from '@/types';
 
 const UserTableItem: React.FC<IUserResponse> = (user) => {
   const { id, firstName, lastName, email, role, createdAt } = user;
@@ -32,10 +32,10 @@ const UserTableItem: React.FC<IUserResponse> = (user) => {
         {createdDate}
       </TableCell>
       <TableCell>
-        <IconButton onClick={onEdit(id)}>
+        <IconButton onClick={onEdit(id ?? '')}>
           <Edit />
         </IconButton>
-        <IconButton onClick={onDelete(user)}>
+        <IconButton onClick={onDelete(user ?? '')}>
           <Delete />
         </IconButton>
       </TableCell>
