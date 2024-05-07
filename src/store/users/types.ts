@@ -1,4 +1,4 @@
-import type { IUserResponse } from '@/types';
+import { IUserResponse } from '@/interfaces';
 
 export interface IUsersState {
   isDeleteUserModalOpen: boolean;

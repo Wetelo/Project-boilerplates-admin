@@ -1,13 +1,18 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, MouseEvent } from 'react';
 import { useCallback, useState } from 'react';
 
 const usePagination = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const onPageChange = useCallback((newPage: number) => {
-    setPage(newPage);
-  }, []);
+  const onPageChange = useCallback(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    (event: MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+      setPage(newPage);
+    },
+    [],
+  );
 
   const onRowsPerPageChange = useCallback((event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));

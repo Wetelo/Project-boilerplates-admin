@@ -11,6 +11,7 @@ export interface IUserResponse {
   role: UserRoleEnum;
   firstName?: string;
   lastName?: string;
+  createdAt: string;
 }
 
 export interface IMetaResponse {
