@@ -1,5 +1,19 @@
 import type { ChangeEvent, MouseEvent } from 'react';
 
+import { FilterTypes } from '@/types';
+
+export interface FilterValues {
+  label: string;
+  value: number | string | boolean;
+}
+
+export interface FilterItem {
+  name: string;
+  type: FilterTypes;
+  defaultValue?: string;
+  values?: FilterValues[];
+}
+
 export interface IPaginationParams {
   page: number;
   count: number;

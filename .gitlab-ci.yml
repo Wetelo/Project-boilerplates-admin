@@ -1,0 +1,67 @@
+default:
+  image: node:16
+stages:
+  - test
+  - deploy
+
+test_build:
+  stage: test
+  image: node:20
+  script:
+    - npm cache clean --force
+    - npm install
+    - npm run build
+    - echo "the project directory is - $CI_PROJECT_DIR - $PWD"
+    - echo "Finish Success"
+  only:
+    refs:
+      - develop
+
+deploy_stage_ssh:
+  stage: deploy
+  image: keymetrics/pm2:6
+  script:
+    - echo "====== Deploy to staging server ======"
+    - apk update && apk upgrade
+    - apk add git openssh bash
+    - mkdir ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$WETELO_TEST_SERVER_DEPLOY_USER@$WETELO_TEST_TARGET_SERVER_HOST "
+    - echo $WETELO_TEST_SERVER_SK_BASE64 | base64 -d > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+    - echo "Test ssh connection"
+    - ssh -o StrictHostKeyChecking=no -T "$WETELO_TEST_SERVER_DEPLOY_USER@$WETELO_TEST_TARGET_SERVER_HOST"
+    - echo "Setup target server directories"
+    - echo "$PWD"
+    - echo "make deploy staging"
+    - pm2 deploy pm2-app.json staging
+    - echo "FINISH"
+  environment:
+    name: deploying
+  only:
+    - staging
+
+deploy_prod_ssh:
+  stage: deploy
+  image: keymetrics/pm2:6
+  script:
+    - echo "====== Deploy to production server ======"
+    - apk update && apk upgrade
+    - apk add git openssh bash
+    - mkdir ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$WETELO_PROD_SERVER_DEPLOY_USER@$WETELO_PROD_TARGET_SERVER_HOST "
+    - echo $WETELO_PROD_SERVER_SK_BASE64 | base64 -d > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+    - echo "Test ssh connection"
+    - ssh -o StrictHostKeyChecking=no -T "$WETELO_PROD_SERVER_DEPLOY_USER@$WETELO_PROD_TARGET_SERVER_HOST"
+    - echo "Setup target server directories"
+    - echo "$PWD"
+    - echo "make deploy production"
+    - pm2 deploy pm2-app.json production
+    - echo "FINISH"
+
+  environment:
+    name: deploying
+  only:
+    - notmaster

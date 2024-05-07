@@ -1,6 +1,6 @@
 import { API_ROUTES } from '@/constants/apiRoutes';
+import { IRequestParams, IResponse, IUserResponse } from '@/interfaces';
 import { baseApi } from '@/services/base';
-import type { IRequestParams, IResponse, IUserResponse } from '@/types';
 
 export const usersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
