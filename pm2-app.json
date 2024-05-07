@@ -1,0 +1,32 @@
+{
+  "apps": [
+    {
+      "name": "admin",
+      "script": "npm",
+      "args": "start",
+      "instances": "1",
+      "exec_mode": "cluster",
+      "watch": false,
+      "merge_logs": false,
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "staging": {
+      "user": "wetelo_develop",
+      "host": ["135.181.249.170"],
+      "ref": "origin/staging",
+      "repo": "https://repo:deploy_tocken@gitlab.com/admin.git",
+      "path": "/mnt/admin/public_html",
+      "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
+      "key": "/home/key",
+      "pre-setup": "echo 'This is a local executed command'",
+      "post-setup": "ls -la && source ~/.nvm/nvm.sh && source ~/.profile &&  node -v && nvm use 20.12 && pwd && cp .env.staging .env && npm install && npm run build",
+      "pre-deploy-local": "echo 'This is a local executed command'",
+      "post-deploy": "ls -la && source ~/.nvm/nvm.sh && source ~/.profile &&  node -v && nvm use 16 && pwd && cp .env.staging .env && npm install && REACT_APP_ENV=staging npm run build && cd build && ls -al"
+    }
+  }
+}

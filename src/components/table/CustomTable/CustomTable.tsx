@@ -18,8 +18,8 @@ import React, { memo } from 'react';
 
 import { TableFilters } from '@/components';
 import { SortingOrderEnum } from '@/enums/sorting/sortingOrder';
+import { IPaginationParams } from '@/interfaces';
 import { FiltersChangeFunc, FiltersType, sortingFields, TSortingFields } from '@/types';
-import { IPaginationParams } from '@/types/pagination-params';
 
 import { styles } from './styles';
 
